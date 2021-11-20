@@ -25,7 +25,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 // hot module replacement for reducers
 if (module.hot) {
   module.hot.accept('app/storeReducer', () => {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
     const reducers = require('app/storeReducer').default;
 
     store.replaceReducer(reducers);

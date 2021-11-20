@@ -31,7 +31,5 @@ serviceWorker.unregister();
 
 // Webpack Hot Module Replacement API
 if (module.hot) {
-  module.hot.accept('./app', () => {
-    render();
-  });
+  module.hot.accept('./app', () => render());
 }

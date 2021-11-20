@@ -1,9 +1,19 @@
+import { useEffect } from 'react';
+
 import logo from './logo.svg';
 import './App.css';
 
 import { Counter } from 'features/counter/Counter';
+import { fetchProducts } from 'slices/product';
+import { useAppDispatch } from './hooks';
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
+
   return (
     <div className="App">
       <header className="App-header">

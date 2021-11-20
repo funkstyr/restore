@@ -12,7 +12,8 @@
     "lint": "eslint src/**/*.ts{,x}",
     "lint:fix": "eslint './src/**/*.ts{,x}' --fix",
     "typecheck": "tsc --noEmit",
-    "types:query": "npx @rtk-incubator/rtk-query-codegen-openapi --hooks http://localhost:5000/swagger/v1/swagger.json > ./src/types/query.ts"
+    "types:api": "npx swagger-typescript-api -p http://localhost:5000/swagger/v1/swagger.json -o ./src/types -n api.ts",
+    "types:query": "npx @rtk-incubator/rtk-query-codegen-openapi --hooks http://localhost:5000/swagger/v1/swagger.json --file ./src/types/query.ts"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.6.2",
