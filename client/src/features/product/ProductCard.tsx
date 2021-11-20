@@ -1,3 +1,7 @@
+import { FC } from 'react';
+import { Link } from 'react-router-dom';
+import { EntityId } from '@reduxjs/toolkit';
+
 import {
   Avatar,
   Button,
@@ -8,10 +12,9 @@ import {
   CardMedia,
   Typography,
 } from '@mui/material';
-import { EntityId } from '@reduxjs/toolkit';
+
 import { useAppSelector } from 'app/hooks';
-import { FC } from 'react';
-import { productSelectors } from 'slices/product';
+import { productSelectors } from 'features/product/productSlice';
 
 interface Props {
   productId: EntityId;
@@ -66,7 +69,9 @@ const ProductCard: FC<Props> = (props) => {
       <CardActions>
         <Button size="small">Add to cart</Button>
 
-        <Button size="small">View</Button>
+        <Button size="small" component={Link} to={`/product/${productId}`}>
+          View
+        </Button>
       </CardActions>
     </Card>
   );

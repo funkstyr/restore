@@ -1,10 +1,11 @@
+import { useState } from 'react';
+
 import { ThemeProvider } from '@emotion/react';
 import { Container, createTheme, CssBaseline } from '@mui/material';
 
 import 'app/App.css';
 import Header from 'app/components/Header';
-import Catalog from 'features/catalog/Catalog';
-import { useState } from 'react';
+import Routes from 'pages/routes';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -27,8 +28,8 @@ function App() {
 
       <Header toggleMode={toggleMode} isDarkMode={darkMode} />
 
-      <Container>
-        <Catalog />
+      <Container sx={{ mt: 2 }}>
+        <Routes />
       </Container>
     </ThemeProvider>
   );

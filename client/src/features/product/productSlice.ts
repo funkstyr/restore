@@ -36,7 +36,7 @@ export const fetchProducts = createAsyncThunk(
 
 export const fetchProductById = createAsyncThunk(
   `${name}/fetchProductById`,
-  async (productId: number, thunkAPI) => {
+  async (productId: Product['id'] | string, thunkAPI) => {
     const { extra }: any = thunkAPI;
     const { api } = extra;
 
