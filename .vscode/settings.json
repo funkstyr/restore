@@ -1,3 +1,5 @@
 {
-    "omnisharp.enableImportCompletion": true
+    "omnisharp.enableImportCompletion": true,
+    "csharpextensions.privateMemberPrefix": "_",
+    "csharpextensions.useThisForCtorAssignments": false
 }
