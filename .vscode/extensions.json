@@ -3,6 +3,12 @@
 	// for the documentation about the extensions.json format
 	"recommendations": [
 		"dbaeumer.vscode-eslint",
-		"EditorConfig.EditorConfig"
+		"ms-dotnettools.csharp",
+		"kreativ-software.csharpextensions",
+		"formulahendry.auto-rename-tag",
+		"coenraads.bracket-pair-colorizer",
+		"pkief.material-icon-theme",
+		"patcx.vscode-nuget-gallery",
+		"alexcvzz.vscode-sqlite"
 	]
 }

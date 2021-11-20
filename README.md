@@ -2,10 +2,14 @@
 
 ## .Net Core
 
-create project
+### create project
 
 `dotnet new sln`
 
 `dotnet new webapi -o API`
 
 `dotnet sln add API`
+
+### run project
+
+`dotnet run`
