@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import './index.css';
 import App from './app';
 import { store } from './app/store';
 import * as serviceWorker from './serviceWorker';
@@ -11,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 const rootEl = document.getElementById('root');
 
 function render() {
-  ReactDOM.render(
+  ReactDOM.hydrate(
     <React.StrictMode>
       <Provider store={store}>
         <BrowserRouter>
