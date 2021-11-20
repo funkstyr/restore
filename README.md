@@ -12,4 +12,4 @@
 
 ### run project
 
-`dotnet run`
+`dotnet watch run`
