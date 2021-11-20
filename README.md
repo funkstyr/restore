@@ -13,3 +13,19 @@
 ### run project
 
 `dotnet watch run`
+
+
+### database
+
+
+#### Initial Migrations
+
+ Install/Update dotnet-ef
+
+ > dotnet tool install --global dotnet-ef
+
+ > dotnet tool update --global dotnet-ef
+
+ `dotnet ef migrations add InitialCreate -o Data/Migrations`
+
+ `dotnet ef database update`
