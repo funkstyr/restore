@@ -1,4 +1,5 @@
 import {
+  Button,
   Divider,
   Grid,
   Table,
@@ -9,6 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { addBasketItem } from 'features/basket/basketSlice';
 import {
   fetchProductById,
   productSelectors,
@@ -28,6 +30,9 @@ const ProductDetailsPage = () => {
   useEffect(() => {
     dispatch(fetchProductById(productId));
   }, [dispatch, productId]);
+
+  const handleAddItem = () =>
+    dispatch(addBasketItem({ productId, quantity: 1 }));
 
   if (!product) return <h3>Product not found</h3>;
 
@@ -73,6 +78,12 @@ const ProductDetailsPage = () => {
                 <TableCell>
                   {product.quantityInStock || 0 > 1 ? 'yes' : 'no'}
                 </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <Button variant="contained" onClick={handleAddItem}>
+                  Add to cart
+                </Button>
               </TableRow>
             </TableBody>
           </Table>

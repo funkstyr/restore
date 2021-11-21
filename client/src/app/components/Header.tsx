@@ -40,11 +40,10 @@ const navStyle = {
 const Header: FC<Props> = (props) => {
   const { toggleMode, isDarkMode } = props;
 
-  const cartItemCount = useAppSelector(
-    (state) => basketItemSelector.selectTotal(state)
-    // may want to loop through and count qty of each,
-    // this is just each individual item
-  );
+  const cartItemCount = useAppSelector((state) => {
+    const items = basketItemSelector.selectAll(state);
+    return items.reduce((sum, item) => sum + (item.quantity || 0), 0);
+  });
 
   return (
     <AppBar position="static">

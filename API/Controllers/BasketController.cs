@@ -64,7 +64,7 @@ namespace API.Controllers
             var result = await _context.SaveChangesAsync() > 0;
             if (!result) return BadRequest(new ProblemDetails { Title = "Problem removing item from basket" });
 
-            return AcceptedAtRoute("GetBasket", MapBasketToDto(basket));
+            return MapBasketToDto(basket);
         }
 
         private async Task<Basket> RetrieveBasket()

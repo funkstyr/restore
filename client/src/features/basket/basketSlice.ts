@@ -115,6 +115,8 @@ const basketSlice = createSlice({
       state.buyerId = payload.buyerId;
 
       basketItemAdapter.upsertMany(state, payload.items);
+
+      // todo: figure out how to delete item when qty 0
     });
   },
 });
