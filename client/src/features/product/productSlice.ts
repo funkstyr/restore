@@ -24,9 +24,9 @@ export const fetchProducts = createAsyncThunk(
   `${name}/fetchProducts`,
   async (_, thunkAPI) => {
     const { extra }: any = thunkAPI;
-    const { agent } = extra;
+    const { api } = extra;
 
-    const response = await agent.Catalog.list();
+    const response = await api.Catalog.list();
 
     return response;
   }
@@ -38,9 +38,9 @@ export const fetchProductById = createAsyncThunk(
   `${name}/fetchProductById`,
   async (productId: Product['id'] | string, thunkAPI) => {
     const { extra }: any = thunkAPI;
-    const { agent } = extra;
+    const { api } = extra;
 
-    const response = await agent.Catalog.details(productId);
+    const response = await api.Catalog.details(productId);
 
     return response;
   }

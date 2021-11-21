@@ -8,7 +8,7 @@ export const store = configureStore({
 
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
-      thunk: { extraArgument: { agent } },
+      thunk: { extraArgument: { api: agent } },
     });
   },
 });
