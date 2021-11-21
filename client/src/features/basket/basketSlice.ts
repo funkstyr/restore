@@ -92,7 +92,7 @@ const basketSlice = createSlice({
       state.fetchLoading = false;
       state.buyerId = payload.buyerId;
 
-      basketItemAdapter.upsertMany(state, payload.items);
+      basketItemAdapter.setAll(state, payload.items);
     });
 
     builder.addCase(addBasketItem.pending, (state) => {
@@ -114,7 +114,7 @@ const basketSlice = createSlice({
       state.removeLoading = false;
       state.buyerId = payload.buyerId;
 
-      basketItemAdapter.upsertMany(state, payload.items);
+      basketItemAdapter.setAll(state, payload.items);
 
       // todo: figure out how to delete item when qty 0
     });
