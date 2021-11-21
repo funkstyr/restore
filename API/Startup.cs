@@ -59,7 +59,11 @@ namespace API
             {
                 if (env.IsDevelopment())
                 {
-                    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+                    opt
+                        .AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowCredentials()
+                        .WithOrigins("http://localhost:3000");
                 }
             });
 
