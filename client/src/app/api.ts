@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 // visit https://cors-anywhere.herokuapp.com/corsdemo to get access
 const api = axios.create({
   baseURL: 'http://localhost:5000/api',
+  withCredentials: true,
   timeout: 10000,
 });
 
@@ -43,7 +44,15 @@ const requests = {
 
 const Catalog = {
   list: () => requests.get('products'),
-  details: (id: number) => requests.get(`products/${id}`),
+  details: (productId: number) => requests.get(`products/${productId}`),
+};
+
+const Basket = {
+  get: () => requests.get('basket'),
+  addItem: (productId: number, quantity = 1) =>
+    requests.post(`basket?productId=${productId}&quantity=${quantity}`, {}),
+  removeItem: (productId: number, quantity = 1) =>
+    requests.delete(`basket?productId=${productId}&quantity=${quantity}`),
 };
 
 const TestErrors = {
@@ -56,6 +65,7 @@ const TestErrors = {
 
 export const agent = {
   Catalog,
+  Basket,
   TestErrors,
 };
 

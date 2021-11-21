@@ -64,7 +64,7 @@ namespace API.Controllers
             var result = await _context.SaveChangesAsync() > 0;
             if (!result) return BadRequest(new ProblemDetails { Title = "Problem removing item from basket" });
 
-            return CreatedAtRoute("GetBasket", MapBasketToDto(basket));
+            return AcceptedAtRoute("GetBasket", MapBasketToDto(basket));
         }
 
         private async Task<Basket> RetrieveBasket()
@@ -78,7 +78,8 @@ namespace API.Controllers
         private Basket CreateBasket()
         {
             var buyerId = Guid.NewGuid().ToString();
-            var cookieOptions = new CookieOptions { IsEssential = true, Expires = DateTime.Now.AddDays(30) };
+            // buyerId available in basket dto
+            var cookieOptions = new CookieOptions { IsEssential = true, HttpOnly = true, Expires = DateTime.Now.AddDays(30) };
             Response.Cookies.Append("buyerId", buyerId, cookieOptions);
 
             var basket = new Basket { BuyerId = buyerId };

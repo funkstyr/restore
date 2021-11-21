@@ -13,8 +13,10 @@ import {
   Typography,
 } from '@mui/material';
 
-import { useAppSelector } from 'app/hooks';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { productSelectors } from 'features/product/productSlice';
+import { addBasketItem } from 'features/basket/basketSlice';
+import { LoadingButton } from '@mui/lab';
 
 interface Props {
   productId: EntityId;
@@ -22,10 +24,16 @@ interface Props {
 
 const ProductCard: FC<Props> = (props) => {
   const { productId } = props;
+  const dispatch = useAppDispatch();
 
   const product = useAppSelector((state) =>
     productSelectors.selectById(state, productId!)
   );
+
+  const isLoading = useAppSelector((state) => state.basket.addLoading);
+
+  const handleAddItem = () =>
+    dispatch(addBasketItem({ productId, quantity: 1 }));
 
   if (!product) return null;
 
@@ -67,7 +75,9 @@ const ProductCard: FC<Props> = (props) => {
       </CardContent>
 
       <CardActions>
-        <Button size="small">Add to cart</Button>
+        <LoadingButton size="small" onClick={handleAddItem} loading={isLoading}>
+          Add to cart
+        </LoadingButton>
 
         <Button size="small" component={Link} to={`/product/${productId}`}>
           View

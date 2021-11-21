@@ -9,6 +9,28 @@
  * ---------------------------------------------------------------
  */
 
+export interface BasketDto {
+  /** @format int32 */
+  id?: number;
+  buyerId?: string | null;
+  items?: BasketItemDto[] | null;
+}
+
+export interface BasketItemDto {
+  /** @format int32 */
+  productId?: number;
+  name?: string | null;
+
+  /** @format int64 */
+  price?: number;
+  pictureUrl?: string | null;
+  brand?: string | null;
+  type?: string | null;
+
+  /** @format int32 */
+  quantity?: number;
+}
+
 export interface Product {
   /** @format int32 */
   id?: number;
@@ -251,6 +273,123 @@ export class HttpClient<SecurityDataType = unknown> {
  */
 export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDataType> {
   api = {
+    /**
+     * No description
+     *
+     * @tags Basket
+     * @name GetBasket
+     * @request GET:/api/Basket
+     */
+    getBasket: (params: RequestParams = {}) =>
+      this.request<BasketDto, any>({
+        path: `/api/Basket`,
+        method: "GET",
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Basket
+     * @name BasketCreate
+     * @request POST:/api/Basket
+     */
+    basketCreate: (query?: { productId?: number; quantity?: number }, params: RequestParams = {}) =>
+      this.request<BasketDto, any>({
+        path: `/api/Basket`,
+        method: "POST",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Basket
+     * @name BasketDelete
+     * @request DELETE:/api/Basket
+     */
+    basketDelete: (query?: { productId?: number; quantity?: number }, params: RequestParams = {}) =>
+      this.request<BasketDto, any>({
+        path: `/api/Basket`,
+        method: "DELETE",
+        query: query,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Buggy
+     * @name BuggyNotFoundList
+     * @request GET:/api/Buggy/not-found
+     */
+    buggyNotFoundList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/Buggy/not-found`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Buggy
+     * @name BuggyBadRequestList
+     * @request GET:/api/Buggy/bad-request
+     */
+    buggyBadRequestList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/Buggy/bad-request`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Buggy
+     * @name BuggyUnauthorizedList
+     * @request GET:/api/Buggy/unauthorized
+     */
+    buggyUnauthorizedList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/Buggy/unauthorized`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Buggy
+     * @name BuggyValidationErrorList
+     * @request GET:/api/Buggy/validation-error
+     */
+    buggyValidationErrorList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/Buggy/validation-error`,
+        method: "GET",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Buggy
+     * @name BuggyServerErrorList
+     * @request GET:/api/Buggy/server-error
+     */
+    buggyServerErrorList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/Buggy/server-error`,
+        method: "GET",
+        ...params,
+      }),
+
     /**
      * No description
      *

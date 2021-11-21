@@ -11,6 +11,8 @@ import {
   Typography,
 } from '@mui/material';
 import { ShoppingCart } from '@mui/icons-material';
+import { useAppSelector } from 'app/hooks';
+import { basketItemSelector } from 'features/basket/basketSlice';
 
 interface Props {
   toggleMode: () => void;
@@ -38,6 +40,12 @@ const navStyle = {
 const Header: FC<Props> = (props) => {
   const { toggleMode, isDarkMode } = props;
 
+  const cartItemCount = useAppSelector(
+    (state) => basketItemSelector.selectTotal(state)
+    // may want to loop through and count qty of each,
+    // this is just each individual item
+  );
+
   return (
     <AppBar position="static">
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -60,8 +68,13 @@ const Header: FC<Props> = (props) => {
             );
           })}
 
-          <IconButton size="large" sx={{ color: 'inherit' }}>
-            <Badge badgeContent={4} color="secondary">
+          <IconButton
+            size="large"
+            sx={{ color: 'inherit' }}
+            component={NavLink}
+            to="/basket"
+          >
+            <Badge badgeContent={cartItemCount} color="secondary">
               <ShoppingCart />
             </Badge>
           </IconButton>
