@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import api from 'app/api';
+import { agent } from 'app/api';
 import reducer from 'app/storeReducer';
 
 export const store = configureStore({
@@ -8,7 +8,7 @@ export const store = configureStore({
 
   middleware: (getDefaultMiddleware) => {
     return getDefaultMiddleware({
-      thunk: { extraArgument: { api } },
+      thunk: { extraArgument: { agent } },
     });
   },
 });

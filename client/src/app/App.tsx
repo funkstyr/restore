@@ -1,8 +1,10 @@
 import { useState } from 'react';
+// import { ToastContainer } from 'react-toastify';
 
 import { ThemeProvider } from '@emotion/react';
 import { Container, createTheme, CssBaseline } from '@mui/material';
 
+import 'react-toastify/dist/ReactToastify.css';
 import 'app/App.css';
 import Header from 'app/components/Header';
 import Routes from 'pages/routes';
@@ -24,6 +26,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      {/* <ToastContainer position="bottom-right" hideProgressBar> */}
       <CssBaseline />
 
       <Header toggleMode={toggleMode} isDarkMode={darkMode} />
@@ -31,6 +34,7 @@ function App() {
       <Container sx={{ mt: 2 }}>
         <Routes />
       </Container>
+      {/* </ToastContainer> */}
     </ThemeProvider>
   );
 }
