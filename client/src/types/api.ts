@@ -397,10 +397,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @name ProductsList
      * @request GET:/api/Products
      */
-    productsList: (params: RequestParams = {}) =>
+    productsList: (
+      query?: {
+        OrderBy?: string;
+        SearchTerm?: string;
+        Brands?: string;
+        Types?: string;
+        PageNumber?: number;
+        PageSize?: number;
+      },
+      params: RequestParams = {},
+    ) =>
       this.request<Product[], any>({
         path: `/api/Products`,
         method: "GET",
+        query: query,
         format: "json",
         ...params,
       }),
@@ -417,6 +428,20 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/Products/${id}`,
         method: "GET",
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Products
+     * @name ProductsFiltersList
+     * @request GET:/api/Products/filters
+     */
+    productsFiltersList: (params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/Products/filters`,
+        method: "GET",
         ...params,
       }),
   };
