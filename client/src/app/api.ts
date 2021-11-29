@@ -14,6 +14,15 @@ const api = axios.create({
 //   timeout: 10000,
 // });
 
+api.interceptors.request.use((config) => {
+  const user = localStorage.getItem('account') || '';
+  const { token } = JSON.parse(user);
+
+  if (token) config.headers!.Authorization = `Bearer ${token}`;
+
+  return config;
+});
+
 api.interceptors.response.use(
   (response) => response,
   (error: AxiosError) => {
@@ -57,6 +66,12 @@ const Basket = {
     requests.delete(`basket?productId=${productId}&quantity=${quantity}`),
 };
 
+const Account = {
+  register: (values: any) => api.post('account/register', values),
+  login: (values: any) => api.post('account/login', values),
+  current: () => api.get('account/currentUser'),
+};
+
 const TestErrors = {
   get400Error: () => requests.get('buggy/bad-request'),
   get401Error: () => requests.get('buggy/unauthorized'),
@@ -68,6 +83,7 @@ const TestErrors = {
 export const agent = {
   Catalog,
   Basket,
+  Account,
   TestErrors,
 };
 

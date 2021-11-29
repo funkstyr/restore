@@ -43,6 +43,13 @@ const CheckoutPage = lazy(
     )
 );
 
+const AccountPage = lazy(
+  () =>
+    import(
+      /* webpackChunkName: "account", webpackPrefetch: true */ 'pages/AccountPage'
+    )
+);
+
 interface RouteData {
   exact?: boolean;
   path: string;
@@ -79,6 +86,11 @@ const _routes: RouteData[] = [
     exact: true,
     path: '/checkout',
     Component: CheckoutPage,
+  },
+  {
+    exact: true,
+    path: '/account',
+    Component: AccountPage,
   },
 ];
 

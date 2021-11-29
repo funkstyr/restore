@@ -13,6 +13,7 @@ import {
 import { ShoppingCart } from '@mui/icons-material';
 import { useAppSelector } from 'app/hooks';
 import { basketItemSelector } from 'features/basket/basketSlice';
+import SignedInMenu from './SignedInMenu';
 
 interface Props {
   toggleMode: () => void;
@@ -44,6 +45,8 @@ const Header: FC<Props> = (props) => {
     const items = basketItemSelector.selectAll(state);
     return items.reduce((sum, item) => sum + (item.quantity || 0), 0);
   });
+
+  const username = useAppSelector((state) => state.account.username);
 
   return (
     <AppBar position="static">
@@ -78,9 +81,13 @@ const Header: FC<Props> = (props) => {
             </Badge>
           </IconButton>
 
-          <ListItem component={NavLink} to="/login" sx={navStyle}>
-            Login
-          </ListItem>
+          {!username ? (
+            <ListItem component={NavLink} to="/account" sx={navStyle}>
+              Login
+            </ListItem>
+          ) : (
+            <SignedInMenu />
+          )}
         </List>
       </Toolbar>
     </AppBar>

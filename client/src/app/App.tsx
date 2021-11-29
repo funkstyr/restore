@@ -10,11 +10,13 @@ import Header from 'app/components/Header';
 import Routes from 'pages/routes';
 import { useAppDispatch } from 'app/hooks';
 import { fetchBasket } from 'features/basket/basketSlice';
+import { fetchCurrentUser } from 'features/account/accountSlice';
 
 function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(fetchCurrentUser());
     dispatch(fetchBasket());
   }, [dispatch]);
 

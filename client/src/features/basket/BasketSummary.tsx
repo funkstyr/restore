@@ -5,7 +5,6 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Typography,
 } from '@mui/material';
 import { useAppSelector } from 'app/hooks';
 import { basketItemSelector } from './basketSlice';

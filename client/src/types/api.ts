@@ -31,6 +31,11 @@ export interface BasketItemDto {
   quantity?: number;
 }
 
+export interface LoginDto {
+  username?: string | null;
+  password?: string | null;
+}
+
 export interface Product {
   /** @format int32 */
   id?: number;
@@ -45,6 +50,18 @@ export interface Product {
 
   /** @format int32 */
   quantityInStock?: number;
+}
+
+export interface RegisterDto {
+  username?: string | null;
+  password?: string | null;
+  email?: string | null;
+}
+
+export interface UserDto {
+  email?: string | null;
+  token?: string | null;
+  username?: string | null;
 }
 
 export interface WeatherForecast {
@@ -276,14 +293,70 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
     /**
      * No description
      *
+     * @tags Account
+     * @name AccountRegisterCreate
+     * @request POST:/api/Account/register
+     * @secure
+     */
+    accountRegisterCreate: (data: RegisterDto, params: RequestParams = {}) =>
+      this.request<void, any>({
+        path: `/api/Account/register`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name AccountLoginCreate
+     * @request POST:/api/Account/login
+     * @secure
+     */
+    accountLoginCreate: (data: LoginDto, params: RequestParams = {}) =>
+      this.request<UserDto, any>({
+        path: `/api/Account/login`,
+        method: "POST",
+        body: data,
+        secure: true,
+        type: ContentType.Json,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Account
+     * @name AccountCurrentUserList
+     * @request GET:/api/Account/currentUser
+     * @secure
+     */
+    accountCurrentUserList: (params: RequestParams = {}) =>
+      this.request<UserDto, any>({
+        path: `/api/Account/currentUser`,
+        method: "GET",
+        secure: true,
+        format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
      * @tags Basket
      * @name GetBasket
      * @request GET:/api/Basket
+     * @secure
      */
     getBasket: (params: RequestParams = {}) =>
       this.request<BasketDto, any>({
         path: `/api/Basket`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -294,12 +367,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Basket
      * @name BasketCreate
      * @request POST:/api/Basket
+     * @secure
      */
     basketCreate: (query?: { productId?: number; quantity?: number }, params: RequestParams = {}) =>
       this.request<BasketDto, any>({
         path: `/api/Basket`,
         method: "POST",
         query: query,
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -310,12 +385,14 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Basket
      * @name BasketDelete
      * @request DELETE:/api/Basket
+     * @secure
      */
     basketDelete: (query?: { productId?: number; quantity?: number }, params: RequestParams = {}) =>
       this.request<BasketDto, any>({
         path: `/api/Basket`,
         method: "DELETE",
         query: query,
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -326,11 +403,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Buggy
      * @name BuggyNotFoundList
      * @request GET:/api/Buggy/not-found
+     * @secure
      */
     buggyNotFoundList: (params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/Buggy/not-found`,
         method: "GET",
+        secure: true,
         ...params,
       }),
 
@@ -340,11 +419,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Buggy
      * @name BuggyBadRequestList
      * @request GET:/api/Buggy/bad-request
+     * @secure
      */
     buggyBadRequestList: (params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/Buggy/bad-request`,
         method: "GET",
+        secure: true,
         ...params,
       }),
 
@@ -354,11 +435,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Buggy
      * @name BuggyUnauthorizedList
      * @request GET:/api/Buggy/unauthorized
+     * @secure
      */
     buggyUnauthorizedList: (params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/Buggy/unauthorized`,
         method: "GET",
+        secure: true,
         ...params,
       }),
 
@@ -368,11 +451,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Buggy
      * @name BuggyValidationErrorList
      * @request GET:/api/Buggy/validation-error
+     * @secure
      */
     buggyValidationErrorList: (params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/Buggy/validation-error`,
         method: "GET",
+        secure: true,
         ...params,
       }),
 
@@ -382,11 +467,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Buggy
      * @name BuggyServerErrorList
      * @request GET:/api/Buggy/server-error
+     * @secure
      */
     buggyServerErrorList: (params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/Buggy/server-error`,
         method: "GET",
+        secure: true,
         ...params,
       }),
 
@@ -396,6 +483,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Products
      * @name ProductsList
      * @request GET:/api/Products
+     * @secure
      */
     productsList: (
       query?: {
@@ -412,6 +500,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/api/Products`,
         method: "GET",
         query: query,
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -422,11 +511,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Products
      * @name ProductsDetail
      * @request GET:/api/Products/{id}
+     * @secure
      */
     productsDetail: (id: number, params: RequestParams = {}) =>
       this.request<Product, any>({
         path: `/api/Products/${id}`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params,
       }),
@@ -437,11 +528,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags Products
      * @name ProductsFiltersList
      * @request GET:/api/Products/filters
+     * @secure
      */
     productsFiltersList: (params: RequestParams = {}) =>
       this.request<void, any>({
         path: `/api/Products/filters`,
         method: "GET",
+        secure: true,
         ...params,
       }),
   };
@@ -452,11 +545,13 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @tags WeatherForecast
      * @name GetWeatherForecast
      * @request GET:/WeatherForecast
+     * @secure
      */
     getWeatherForecast: (params: RequestParams = {}) =>
       this.request<WeatherForecast[], any>({
         path: `/WeatherForecast`,
         method: "GET",
+        secure: true,
         format: "json",
         ...params,
       }),
